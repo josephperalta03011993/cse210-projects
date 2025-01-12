@@ -49,7 +49,7 @@ class Program
         }
 
         // Add sign + and - to the letter grade
-        float check_remainder = grade % 10;
+        int check_remainder = grade % 10;
         
         if (check_remainder >= 7)
         {   
