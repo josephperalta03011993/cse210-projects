@@ -49,9 +49,9 @@ class Program
         }
 
         // Add sign + and - to the letter grade
-        int check_remainder = grade % 10;
+        int checkRemainder = grade % 10;
         
-        if (check_remainder >= 7)
+        if (checkRemainder >= 7)
         {   
             // Recognize that there is no A+ grade, only A and A-. 
             // Add some additional logic to your program to detect this case and handle it correctly.
@@ -60,7 +60,7 @@ class Program
                 letter += "+";
             }
         }
-        else if (check_remainder <= 3)
+        else if (checkRemainder <= 3)
         {
             if (letter != "F") 
             {
