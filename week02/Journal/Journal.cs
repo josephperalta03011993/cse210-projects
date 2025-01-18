@@ -29,6 +29,8 @@ public class Journal
 
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {   
+
+
             foreach (Entry entry in _entries)
             {
                 outputFile.WriteLine($"{entry._date}|{entry._promptText}|{entry._entryText}");
@@ -50,6 +52,26 @@ public class Journal
             entry._promptText = parts[1];
             entry._entryText = parts[2];
             _entries.Add(entry);
+        }
+    }
+
+    public void SaveAsCSV(string file)
+    {
+        using (StreamWriter outputFile = new StreamWriter(file))
+        {
+            // write header for the file
+            outputFile.WriteLine("Date,Prompt,Entry");
+
+            foreach (Entry entry in _entries)
+            {
+                string escapedEntry = entry._entryText.Replace("\"", "\"\"");
+                if (escapedEntry.Contains(","))
+                {
+                    escapedEntry = "\"" + escapedEntry + "\"";
+                }
+
+                outputFile.WriteLine($"{entry._date},{entry._promptText},{escapedEntry}");
+            }
         }
     }
 }

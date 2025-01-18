@@ -8,15 +8,16 @@ class Program
         int userChoice = 0;
         Journal journal = new Journal();
 
-        while(userChoice != 5)
+        while(userChoice != 6)
         {
             Console.WriteLine("Welcome to the Journal Program!");
             Console.WriteLine("Please select one of the following choices");
             Console.WriteLine("1. Write");
             Console.WriteLine("2. Display");
             Console.WriteLine("3. Load");
-            Console.WriteLine("4. Save");
-            Console.WriteLine("5. Quit");
+            Console.WriteLine("4. Save as .txt");
+            Console.WriteLine("5. Save as .csv");
+            Console.WriteLine("6. Quit");
             Console.Write("What would you like to do? ");
             // Accept user input
             userChoice = int.Parse(Console.ReadLine());
@@ -56,6 +57,12 @@ class Program
                 Console.WriteLine("What is the filename?");
                 string fileName = Console.ReadLine();
                 journal.SaveToFile(fileName);
+            }
+            else if (userChoice == 5)
+            {
+                Console.WriteLine("What is the filename?");
+                string fileName = Console.ReadLine();
+                journal.SaveAsCSV(fileName);
             }
             else
             {
