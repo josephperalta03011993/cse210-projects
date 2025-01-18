@@ -38,6 +38,18 @@ public class Journal
 
     public void LoadFromFile(string file)
     {
+        string fileName = file;
+        string[] lines = File.ReadAllLines(fileName);
 
+        foreach(string line in lines)
+        {
+            string[] parts = line.Split("|");
+
+            Entry entry = new Entry();
+            entry._date = parts[0];
+            entry._promptText = parts[1];
+            entry._entryText = parts[2];
+            _entries.Add(entry);
+        }
     }
 }
