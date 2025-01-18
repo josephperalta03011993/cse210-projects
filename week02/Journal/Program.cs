@@ -64,6 +64,10 @@ class Program
                 string fileName = Console.ReadLine();
                 journal.SaveAsCSV(fileName);
             }
+            else if (userChoice == 6)
+            {
+                Console.WriteLine("Well done for writing your journal!");
+            }
             else
             {
                 Console.WriteLine("Please input a valid number.");
