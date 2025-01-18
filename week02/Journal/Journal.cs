@@ -29,7 +29,10 @@ public class Journal
 
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {   
-            outputFile.WriteLine(_entries);
+            foreach (Entry entry in _entries)
+            {
+                outputFile.WriteLine($"{entry._date}|{entry._promptText}|{entry._entryText}");
+            }
         }
     }
 

@@ -51,7 +51,9 @@ class Program
             }
             else if (userChoice == 4)
             {
-                Console.WriteLine("4");
+                Console.WriteLine("What is the filename?");
+                string fileName = Console.ReadLine();
+                journal.SaveToFile(fileName);
             }
             else
             {
