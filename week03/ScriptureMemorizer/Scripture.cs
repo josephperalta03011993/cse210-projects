@@ -59,4 +59,18 @@ public class Scripture
 
         return true;
     }
+
+    public int GetUnhiddenWordCount()
+    {
+        int count = 0;
+
+        foreach(var word in _words)
+        {
+            if(!word.IsHidden())
+            {
+                count++;
+            }
+        }
+        return count;
+    }
 }

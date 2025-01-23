@@ -33,7 +33,12 @@ class Program
             }
             else 
             {
-                currentScripture.HideRandomWords(random.Next(1,4));
+                // get the total unhidden words
+                int unhiddenWordCount = currentScripture.GetUnhiddenWordCount();
+                int wordsToHide = Math.Min(3, unhiddenWordCount);
+                int randNum = new Random().Next(1, wordsToHide + 1);
+
+                currentScripture.HideRandomWords(randNum);
             }
 
             Console.Clear();
