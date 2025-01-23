@@ -12,6 +12,16 @@ class Program
                 "and the prophecies and promises which are in them shall all be fulfilled. 38 What I the Lord have spoken, " + 
                 "I have spoken, and I excuse not myself; and though the heavens and the earth pass away, my word shall not " + 
                 "pass away, but shall all be fulfilled, whether by mine own voice or by the voice of my servants, it is the same."),
+            new Scripture(new Reference("D&C", 10, 5), "Pray always, that you may come off conqueror; yea, that you may conquer Satan, and that " + 
+                "you may escape the hands of the servants of Satan that do uphold his work."),
+            new Scripture(new Reference("D&C", 13, 1), "Upon you my fellow servants, in the name of Messiah I confer the Priesthood of Aaron, "+
+                "which holds the keys of the ministering of angels, and of the gospel of repentance, and of baptism by immersion for the remission "+
+                "of sins; and this shall never be taken again from the earth, until the sons of Levi do offer again an offering unto the Lord in "+
+                "righteousness."),
+            new Scripture(new Reference("D&C", 18, 10, 11), "Remember the worth of souls is great in the sight of God;"+
+                "11 For, behold, the Lord your Redeemer suffered death in the flesh; wherefore he suffered the pain of all men, "+
+                "that all men might repent and come unto him."),
+            new Scripture(new Reference("D&C", 25, 13), "Wherefore, lift up thy heart and rejoice, and cleave unto the covenants which thou hast made."),
         };
 
         Random random = new Random();
