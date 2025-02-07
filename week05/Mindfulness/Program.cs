@@ -6,6 +6,7 @@ class Program
     {
         while(true)
         {
+            Console.Clear();
             Console.WriteLine("\nMenu Options:");
             Console.WriteLine("1. Start Breathing Activity");
             Console.WriteLine("2. Start Reflection Activity");
@@ -28,12 +29,11 @@ class Program
             else if(choice == "2")
             {
                 ReflectingActivity reflectingActivity = new ReflectingActivity();
-                reflectingActivityi.Run();
+                reflectingActivity.Run();
             }
             else if(choice == "3")
             {
-                //ListingActivity listingActivity = new ListingActivity();
-                //listingActivity.Run();
+                
             }
             else
             {   

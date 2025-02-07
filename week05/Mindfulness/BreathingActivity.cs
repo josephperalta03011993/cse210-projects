@@ -14,18 +14,18 @@ public class BreathingActivity : Activity
             holding the breath for 7 seconds, and exhaling for 8 seconds. 
             This breathing pattern aims to reduce anxiety or help people get to sleep.
             Lets try to do this but easier version.
-            4-2-4
+            2-2-6
         */
         DisplayStartingMessage();
         
         for (int i = 0; i < _duration / 10; i++)
         {
             Console.Write("\n\nBreath in... ");
-            ShowCountDown(4); // pause
+            ShowCountDown(2); // pause
             Console.Write("\nHold for... ");
             ShowCountDown(2); // hold
             Console.Write("\nBreath out... ");
-            ShowCountDown(4); // pause
+            ShowCountDown(6); // pause
         }
 
         DisplayEndingMessage();
