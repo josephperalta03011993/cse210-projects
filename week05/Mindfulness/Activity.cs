@@ -12,12 +12,14 @@ public class Activity
 
     public void DisplayStartingMessage()
     {
+        Console.Clear();
         Console.WriteLine($"\nWelcome to the {_name}");
         Console.WriteLine($"\n{_description}");
 
         Console.Write("\nHow long, in seconds, would you like for your session? ");
         _duration = int.Parse(Console.ReadLine());
 
+        Console.Clear();
         Console.WriteLine("Get ready...");
         ShowSpinner(3);
     }
