@@ -8,14 +8,24 @@ public class BreathingActivity : Activity
     }
     public void Run()
     {
+
+        /*
+            The 4-7-8 breathing technique involves breathing in for 4 seconds, 
+            holding the breath for 7 seconds, and exhaling for 8 seconds. 
+            This breathing pattern aims to reduce anxiety or help people get to sleep.
+            Lets try to do this but easier version.
+            4-2-4
+        */
         DisplayStartingMessage();
         
         for (int i = 0; i < _duration / 10; i++)
         {
             Console.Write("\n\nBreath in... ");
             ShowCountDown(4); // pause
+            Console.Write("\nHold for... ");
+            ShowCountDown(2); // hold
             Console.Write("\nBreath out... ");
-            ShowCountDown(6); // pause
+            ShowCountDown(4); // pause
         }
 
         DisplayEndingMessage();
