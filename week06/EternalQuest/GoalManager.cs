@@ -6,6 +6,7 @@ public class GoalManager
 {
     private List<Goal> _goals = new List<Goal>();
     private int _score;
+    private LevelManager _levelManager;
 
     public GoalManager()
     {
@@ -19,7 +20,7 @@ public class GoalManager
 
     public void DisplayPlayerInfo()
     {
-        Console.WriteLine($"You have {_score} points.");
+        Console.WriteLine($"\nYou have {_score} points.");
     }
 
     public void ListGoalNames()
@@ -86,7 +87,13 @@ public class GoalManager
                     int bonus = int.Parse(parts[6]); // 6th index should hold the bonus value
                     _score += bonus;
                     Console.WriteLine($"Bonus! You earned {bonus} extra points for completing this checklist goal!");
+
+                    // Add the bonus points to the LevelManager
+                    _levelManager.AddPoints(bonus);
                 }
+
+                // Trigger level-up check
+                _levelManager.AddPoints(points);
 
                 Console.WriteLine($"You now have {_score} points.");
             }
@@ -140,6 +147,10 @@ public class GoalManager
 
         using StreamReader reader = new StreamReader(filePath);
         _score = int.Parse(reader.ReadLine() ?? "0");
+
+        // Initialize LevelManager with the loaded score
+        _levelManager = new LevelManager(_score);
+        _levelManager.CheckLevelUp();
 
         string line;
         while ((line = reader.ReadLine()) != null)
