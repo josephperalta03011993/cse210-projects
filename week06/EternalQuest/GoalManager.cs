@@ -79,6 +79,15 @@ public class GoalManager
             {
                 _score += points;
                 Console.WriteLine($"Congratulations! You have earned {points} points!");
+                
+                // Check for bonus points if it's a ChecklistGoal
+                if (goal is ChecklistGoal checklistGoal && checklistGoal.IsComplete())
+                {
+                    int bonus = int.Parse(parts[6]); // 6th index should hold the bonus value
+                    _score += bonus;
+                    Console.WriteLine($"Bonus! You earned {bonus} extra points for completing this checklist goal!");
+                }
+
                 Console.WriteLine($"You now have {_score} points.");
             }
             else
@@ -91,6 +100,7 @@ public class GoalManager
             Console.WriteLine("Invalid index.");
         }
     }
+
 
     public void SaveGoals(string fileName)
     {
@@ -153,11 +163,28 @@ public class GoalManager
                     break;
 
                 case "ChecklistGoal":
-                    int target = int.Parse(parts[4]);
-                    int completed = int.Parse(parts[5]);
-                    var checklistGoal = new ChecklistGoal(parts[1], parts[2], parts[3], target, completed);
+                if (parts.Length == 7)
+                {
+                    string name = parts[1];
+                    string description = parts[2];
+                    string points = parts[3];
+                    int completed = int.Parse(parts[4]);
+                    int target = int.Parse(parts[5]);
+                    int bonus = int.Parse(parts[6]);
+
+                    var checklistGoal = new ChecklistGoal(name, description, points, target, bonus);
+                    
+                    // Manually update the completed count
+                    var completedField = typeof(ChecklistGoal).GetField("_amountCompleted", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                    completedField?.SetValue(checklistGoal, completed);
+
                     _goals.Add(checklistGoal);
-                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid format for ChecklistGoal.");
+                }
+                break;
 
                 default:
                     Console.WriteLine("Unknown goal type found in file.");

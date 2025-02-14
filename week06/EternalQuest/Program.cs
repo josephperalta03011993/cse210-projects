@@ -47,6 +47,31 @@ class Program
                         default:
                             Console.WriteLine("Invalid goal type.");
                             break;
+                        // Eternal Goal
+                        case "2":
+                            Console.Write("What is the name of your goal? ");
+                            string eternalName = Console.ReadLine();
+                            Console.Write("What is a short description of it? ");
+                            string eternalDesc = Console.ReadLine();
+                            Console.Write("What is the amount of points associated with this goal? ");
+                            string eternalPoints = Console.ReadLine();
+                            goalManager.CreateGoal(new EternalGoal(eternalName, eternalDesc, eternalPoints));
+                            break;
+                        // Checklist Goal
+                        case "3":
+                            Console.Write("What is the name of your goal? ");
+                            string checklistName = Console.ReadLine();
+                            Console.Write("What is a short description of it? ");
+                            string checklistDesc = Console.ReadLine();
+                            Console.Write("What is the amount of points associated with this goal? ");
+                            string checklistPoints = Console.ReadLine();
+                            Console.Write("How many times does this goal need to be accomplished for a bonus? ");
+                            int targetCount = int.Parse(Console.ReadLine() ?? "0");
+                            Console.Write("What is the bonus for completing it that many times? ");
+                            int bonusPoints = int.Parse(Console.ReadLine() ?? "0");
+                            goalManager.CreateGoal(new ChecklistGoal(checklistName, checklistDesc, checklistPoints, targetCount, bonusPoints));
+                            break;
+
                     }
                 break;
 

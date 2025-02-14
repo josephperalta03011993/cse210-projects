@@ -25,11 +25,11 @@ public class ChecklistGoal : Goal
     public override string GetDetailsString()
     {
         string status = IsComplete() ? "[X]" : "[ ]";
-        return $"{status} {_shortName} ({_description}) - Points: {_points} ({_amountCompleted}/{_target})";
+        return $"{status} {_shortName} ({_description} - Points - {_points}) -- Currently completed: ({_amountCompleted}/{_target})";
     }
 
     public override string GetStringRepresentation()
     {
-        return $"{base.GetStringRepresentation()}|{_shortName}|{_description}|{_points}|{_amountCompleted}|{_target}|{_bonus}";
+        return $"{base.GetStringRepresentation()}|{_amountCompleted}|{_target}|{_bonus}";
     }
 }
