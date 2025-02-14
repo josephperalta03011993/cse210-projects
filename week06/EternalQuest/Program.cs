@@ -56,6 +56,23 @@ class Program
                     goalManager.ListGoalDetails();
                     break;
 
+                // Save Goal
+                case "3":
+                    Console.WriteLine("What is the filename for the goal file? ");
+                    string filename = Console.ReadLine();
+
+                    // Add txt extension if not provided
+                    if (!Path.HasExtension(filename))
+                    {
+                        filename = Path.ChangeExtension(filename, ".txt");
+                    }
+
+                    // Create full path in a specific folder (optional)
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Goals", filename);
+
+                    goalManager.SaveGoals(filePath);
+                    Console.WriteLine($"Goal saved to {filePath}");
+                    break;
                 // Quit
                 case "6":
                     running = false;

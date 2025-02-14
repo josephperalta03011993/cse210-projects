@@ -76,13 +76,29 @@ public class GoalManager
     }
 
 
-    public void SaveGoals(string filePath)
+    public void SaveGoals(string fileName)
     {
-        using StreamWriter writer = new StreamWriter(filePath);
-        writer.WriteLine(_score);
-        foreach (var goal in _goals)
+        try
         {
-            writer.WriteLine(goal.GetStringRepresentation());
+            // Ensure the directory exists
+            string directory = Path.GetDirectoryName(fileName);
+            if (!string.IsNullOrEmpty(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                writer.WriteLine(_score);
+                foreach (var goal in _goals)
+                {
+                    writer.WriteLine(goal.GetStringRepresentation());
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving goals: {ex.Message}");
         }
     }
 
