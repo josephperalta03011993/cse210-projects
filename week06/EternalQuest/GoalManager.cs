@@ -104,26 +104,43 @@ public class GoalManager
 
     public void LoadGoals(string filePath)
     {
-        if (File.Exists(filePath))
+        if (!File.Exists(filePath))
         {
-            _goals.Clear();
-            using StreamReader reader = new StreamReader(filePath);
-            _score = int.Parse(reader.ReadLine());
-            string line;
-            while ((line = reader.ReadLine()) != null)
+            Console.WriteLine("File not found!");
+            return;
+        }
+
+        _goals.Clear();
+
+        using StreamReader reader = new StreamReader(filePath);
+        _score = int.Parse(reader.ReadLine() ?? "0");
+
+        string line;
+        while ((line = reader.ReadLine()) != null)
+        {
+            var parts = line.Split('|');
+            string goalType = parts[0];
+
+            switch (goalType)
             {
-                string[] parts = line.Split(',');
-                if (parts.Length == 4)
-                {
-                    var goal = new SimpleGoal(parts[0], parts[1], parts[2]);
-                    if (bool.TryParse(parts[3], out bool isComplete) && isComplete)
-                    {
-                        goal.RecordEvent(); // Mark as complete if the saved state indicates so
-                    }
-                    _goals.Add(goal);
-                }
+                case "SimpleGoal":
+                    _goals.Add(new SimpleGoal(parts[1], parts[2], parts[3]));
+                    break;
+
+                case "EternalGoal":
+                    _goals.Add(new EternalGoal(parts[1], parts[2], parts[3]));
+                    break;
+
+                case "ChecklistGoal":
+                    _goals.Add(new ChecklistGoal(parts[1], parts[2], parts[3], int.Parse(parts[4]), int.Parse(parts[5])));
+                    break;
+
+                default:
+                    Console.WriteLine("Unknown goal type found in file.");
+                    break;
             }
         }
     }
+
 
 } 

@@ -73,6 +73,13 @@ class Program
                     goalManager.SaveGoals(filePath);
                     Console.WriteLine($"Goal saved to {filePath}");
                     break;
+                // Load Goals
+                case "4":
+                    Console.Write("What is the filename for the goal file? ");
+                    string loadFilename = Console.ReadLine();
+                    string loadFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Goals", loadFilename);
+                    goalManager.LoadGoals(loadFilePath);
+                    break;
                 // Quit
                 case "6":
                     running = false;

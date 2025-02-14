@@ -22,6 +22,6 @@ public abstract class Goal
 
     public virtual string GetStringRepresentation()
     {
-        return $"{_shortName}|{_description}|{_points}";
+        return $"{this.GetType().Name}|{_shortName}|{_description}|{_points}";
     }
 }

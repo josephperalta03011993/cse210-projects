@@ -1,4 +1,4 @@
-public abstract class EternalGoal : Goal
+public class EternalGoal : Goal
 {
     public EternalGoal(string name, string description, string points) 
         : base(name, description, points)
@@ -18,6 +18,6 @@ public abstract class EternalGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return $"{_shortName}|{_description}|{_points}";
+        return $"{base.GetStringRepresentation()}|{_shortName}|{_description}|{_points}";
     }
 }
