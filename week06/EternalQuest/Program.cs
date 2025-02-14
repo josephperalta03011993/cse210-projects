@@ -58,7 +58,7 @@ class Program
 
                 // Save Goal
                 case "3":
-                    Console.WriteLine("What is the filename for the goal file? ");
+                    Console.Write("What is the filename for the goal file? ");
                     string filename = Console.ReadLine();
 
                     // Add txt extension if not provided
@@ -73,6 +73,7 @@ class Program
                     goalManager.SaveGoals(filePath);
                     Console.WriteLine($"Goal saved to {filePath}");
                     break;
+                
                 // Load Goals
                 case "4":
                     Console.Write("What is the filename for the goal file? ");
@@ -80,6 +81,14 @@ class Program
                     string loadFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Goals", loadFilename);
                     goalManager.LoadGoals(loadFilePath);
                     break;
+                
+                // Record Event
+                case "5":
+                    Console.WriteLine("The goals are:");
+                    goalManager.ListGoalNames();
+                    goalManager.RecordEvent();
+                    break;
+                
                 // Quit
                 case "6":
                     running = false;

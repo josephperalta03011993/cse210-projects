@@ -24,9 +24,24 @@ public class GoalManager
 
     public void ListGoalNames()
     {
-        foreach (var goal in _goals)
+        if (_goals.Count == 0)
         {
-            Console.WriteLine(goal.GetDetailsString());
+            Console.WriteLine("No goals available.");
+            return;
+        }
+
+        for (int i = 0; i < _goals.Count; i++)
+        {
+            string[] parts = _goals[i].GetStringRepresentation().Split('|');
+            if (parts.Length > 1)
+            {
+                string name = parts[1]; // The short name is at index 1
+                Console.WriteLine($"{i + 1}. {name}");
+            }
+            else
+            {
+                Console.WriteLine($"{i + 1}. Unknown");
+            }
         }
     }
 
@@ -52,17 +67,19 @@ public class GoalManager
 
     public void RecordEvent()
     {
-        Console.WriteLine("Enter the index of the goal you completed:");
-        if (int.TryParse(Console.ReadLine(), out int index) && index >= 0 && index < _goals.Count)
+        Console.Write("Which goal did you accomplish? ");
+        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= _goals.Count)
         {
-            var goal = _goals[index];
+            var goal = _goals[index - 1];
             goal.RecordEvent();
 
-            // Extract points from the string representation
-            string[] parts = goal.GetStringRepresentation().Split(',');
-            if (parts.Length >= 3 && int.TryParse(parts[2], out int points))
+            // Parse points from the goal's string representation
+            string[] parts = goal.GetStringRepresentation().Split('|');
+            if (parts.Length >= 4 && int.TryParse(parts[3], out int points))
             {
                 _score += points;
+                Console.WriteLine($"Congratulations! You have earned {points} points!");
+                Console.WriteLine($"You now have {_score} points.");
             }
             else
             {
@@ -74,7 +91,6 @@ public class GoalManager
             Console.WriteLine("Invalid index.");
         }
     }
-
 
     public void SaveGoals(string fileName)
     {
@@ -124,7 +140,12 @@ public class GoalManager
             switch (goalType)
             {
                 case "SimpleGoal":
-                    _goals.Add(new SimpleGoal(parts[1], parts[2], parts[3]));
+                    var simpleGoal = new SimpleGoal(parts[1], parts[2], parts[3]);
+                    if (bool.TryParse(parts[4], out bool isComplete) && isComplete)
+                    {
+                        simpleGoal.RecordEvent(); // Mark as completed if true
+                    }
+                    _goals.Add(simpleGoal);
                     break;
 
                 case "EternalGoal":
@@ -132,7 +153,10 @@ public class GoalManager
                     break;
 
                 case "ChecklistGoal":
-                    _goals.Add(new ChecklistGoal(parts[1], parts[2], parts[3], int.Parse(parts[4]), int.Parse(parts[5])));
+                    int target = int.Parse(parts[4]);
+                    int completed = int.Parse(parts[5]);
+                    var checklistGoal = new ChecklistGoal(parts[1], parts[2], parts[3], target, completed);
+                    _goals.Add(checklistGoal);
                     break;
 
                 default:
@@ -141,6 +165,5 @@ public class GoalManager
             }
         }
     }
-
 
 } 
