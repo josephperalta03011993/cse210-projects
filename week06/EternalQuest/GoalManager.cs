@@ -11,6 +11,7 @@ public class GoalManager
     public GoalManager()
     {
         _score = 0;
+        _levelManager = new LevelManager(_score); // Initialize with initial score
     }
 
     public void Start()
